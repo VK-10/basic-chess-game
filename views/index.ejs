@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chess App</title>
+    <link rel="icon" href="data:,">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .chessboard {
@@ -12,52 +13,29 @@
             grid-template-rows: repeat(8, minmax(0, 1fr));
             width: 400px;
             height: 400px;
-            transform: rotate(0deg);
+            border: 2px solid #333;
         }
-
-        .piece.white {
-            color: white;
-            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 1));
-        }
-
-        .piece.black {
-            color: black;
-        }
-
-        .flipped {
-            transform: rotate(180deg);
-        }
-
         .square {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
-        .square.light {
+        .square.white {
             background-color: #f0d9b5;
         }
-
-        .square.dark {
+        .square.black {
             background-color: #b58863;
         }
-
         .piece {
-            font-size: 36px;
-            cursor: pointer;
-        }
-
-        .piece.draggable {
+            font-size: 2em;
             cursor: grab;
+            background-color: rgba(255, 0, 0, 0.2); /* Debug */
         }
-
-        .dragging {
-            opacity: 0.5;
+        .piece.white {
+            color: #fff;
         }
-
-        /* Rotate pieces for black player */
-        .flipped .piece {
-            transform: rotate(180deg);
+        .piece.black {
+            color: #000;
         }
     </style>
 </head>
@@ -65,26 +43,8 @@
     <div class="w-full h-screen flex items-center justify-center bg-zinc-900">
         <div class="chessboard" id="chessboard"></div>
     </div>
-    <script>
-        // Select the chessboard container
-        const chessboard = document.getElementById('chessboard');
-
-        // Function to create a square
-        function createSquare(row, col) {
-            const square = document.createElement('div');
-            square.className = 'square ' + ((row + col) % 2 === 0 ? 'light' : 'dark');
-            chessboard.appendChild(square);
-        }
-
-        // Generate chessboard squares
-        for (let row = 0; row < 8; row++) {
-            for (let col = 0; col < 8; col++) {
-                createSquare(row, col);
-            }
-        }
-    </script>
-    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" integrity="sha512-xRllwz2gdZciIB+AkEbeq+gVhX8VB8XsfqeFbUh+SzHlN96dEduwtTuVuc2u9EROlmW9+yhRlxjif66ORpsgVA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.12.0/chess.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chessGame.js"></script>
 </body>
 </html>
