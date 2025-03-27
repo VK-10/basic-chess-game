@@ -9,6 +9,7 @@ const app = express();
 
 const server = http.createServer(app);
 const io = socket(server);
+const port = process.env.PORT || 4000;
 
 const chess = new Chess();
 let players = {};
@@ -70,6 +71,6 @@ io.on("connection", (socket) => {
 });
 
 
-server.listen(3000, () => {
+server.listen(port, () => {
     console.log("Server is running on port 3000");
 });
